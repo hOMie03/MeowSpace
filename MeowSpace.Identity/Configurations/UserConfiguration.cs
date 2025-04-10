@@ -26,7 +26,7 @@ namespace MeowSpace.Identity.Configurations
                     PetName = "Meowdmin",
                     PetType = Domain.Constants.PetType.Admin,
                     PasswordHash = hasher.HashPassword(null, "Meowoof!1!"),
-                    PetProfileImg = "https://media.makeameme.org/created/the-admin-has-5c9be2.jpg"
+                    PetProfileImg = "https://media.makeameme.org/created/the-admin-has-5c9be2.jpg",
                 },
                 new ApplicationUser
                 {

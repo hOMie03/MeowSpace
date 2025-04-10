@@ -1,12 +1,14 @@
 using MeowSpace.API.Helper;
 using MeowSpace.API.Middleware;
 using MeowSpace.Application;
+using MeowSpace.Application.Models.Identity;
 using MeowSpace.Identity;
 using MeowSpace.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
+using Microsoft.OpenApi.Models;
 using Serilog;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -21,6 +23,7 @@ namespace MeowSpace.API
             // Add services to the container.
             builder.Services.AddApplicationServices();
             builder.Services.AddIdentityServices(builder.Configuration);
+            builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
             builder.Services.AddInfraServices(builder.Configuration);
 
             // Configure logging provider
@@ -49,6 +52,7 @@ namespace MeowSpace.API
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddAuthentication(); // For Auth
             //builder.Services.AddSwaggerGen();
 
             // API Versioning
@@ -66,7 +70,34 @@ namespace MeowSpace.API
             });
 
             builder.Services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();                                         
-            builder.Services.AddSwaggerGen(options => options.OperationFilter<SwaggerDefaultValues>());
+            builder.Services.AddSwaggerGen(options =>
+            {
+                options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+                {
+                    Name = "Authorization",
+                    In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+                    Description = "Please enter your token with this format: ''Bearer YOUR_TOKEN''",
+                    Type = Microsoft.OpenApi.Models.SecuritySchemeType.ApiKey,
+                    BearerFormat = "JWT",
+                    Scheme = "bearer"
+
+                });
+                options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Id = "Bearer",
+                                Type = ReferenceType.SecurityScheme
+                            }
+                        },
+                        new string[] { }
+                    }
+                });
+                options.OperationFilter<SwaggerDefaultValues>();
+            });
 
             var app = builder.Build();
 
@@ -84,7 +115,7 @@ namespace MeowSpace.API
 
             app.UseMiddleware<ExceptionMiddleware>();
             app.UseHttpsRedirection();
-
+            app.UseAuthentication(); // For Auth
             app.UseAuthorization();
 
 

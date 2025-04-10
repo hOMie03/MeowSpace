@@ -270,6 +270,12 @@ namespace MeowSpace.Identity.Migrations
                     b.Property<int>("PetType")
                         .HasColumnType("int");
 
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RefreshTokenExpiryTime")
+                        .HasColumnType("datetime2");
+
                     b.HasDiscriminator().HasValue("ApplicationUser");
 
                     b.HasData(
@@ -277,15 +283,15 @@ namespace MeowSpace.Identity.Migrations
                         {
                             Id = "41776062 - 1111 - 1aba - a111 - 2879a6680b9a",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "94ab34e9-daa7-4a8f-8cc5-9e7b63a963cf",
+                            ConcurrencyStamp = "559197cd-1995-4290-94a8-f868326564fd",
                             Email = "admin@meowspace.lol",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@MEOWSPACE.LOL",
                             NormalizedUserName = "MEOWSPACEADMIN",
-                            PasswordHash = "AQAAAAIAAYagAAAAEJlK0N5QPMT6NeyDjT2y16lYynUTTNNA5XxE8YP+GY8+1AUWmwqrgfNDnhUn3R7GVQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAENAYpGdYY8hz7srUD/RdU/xAxkbwqr2hK92IOWiNtEUWs4CfRy12PxqnctuRpU6A/g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "36832faa-f495-4adb-948d-5e1cf1278fcd",
+                            SecurityStamp = "b6d6fb64-9f57-43e1-950c-0e9870de2eb0",
                             TwoFactorEnabled = false,
                             UserName = "MeowSpaceAdmin",
                             PetName = "Meowdmin",
@@ -296,15 +302,15 @@ namespace MeowSpace.Identity.Migrations
                         {
                             Id = "41776062 - 2222 - 1bbb - a222 - 2879a6680b9a",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "814b0710-c04f-46b5-be7c-bd2368e45b7d",
+                            ConcurrencyStamp = "cb96dcde-a5f6-4503-9296-6bb5294c4225",
                             Email = "dharampal@woofwoof.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "DHARAMPAL@WOOFWOOF.COM",
                             NormalizedUserName = "DHARAMPAL_OFFICIAL",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEkAlZgf7M+apA6/s4VMyRMW/bgMCkyUFSZuUa24dc/N9FQU71N95kKzDxnezotxEA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEBLFnMS4kPfKbKjCvvxs5mDKHUBhDFexQGmwZ4/wKSSI6ttHwdOS7g1D+HhfiGpYuA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "999534ff-95c4-47a7-b251-17136e0c85de",
+                            SecurityStamp = "dbcc7c84-b97a-4b37-9772-890be0e925dc",
                             TwoFactorEnabled = false,
                             UserName = "dharampal_official",
                             PetName = "Dharampal",

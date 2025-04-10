@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MeowSpace.Identity.Migrations
 {
     /// <inheritdoc />
-    public partial class initialIdentityContext : Migration
+    public partial class initialIdentityMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -36,6 +36,8 @@ namespace MeowSpace.Identity.Migrations
                     PetName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PetProfileImg = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     PetType = table.Column<int>(type: "int", nullable: true),
+                    RefreshToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RefreshTokenExpiryTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -173,11 +175,11 @@ namespace MeowSpace.Identity.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PetName", "PetProfileImg", "PetType", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PetName", "PetProfileImg", "PetType", "PhoneNumber", "PhoneNumberConfirmed", "RefreshToken", "RefreshTokenExpiryTime", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "41776062 - 1111 - 1aba - a111 - 2879a6680b9a", 0, "94ab34e9-daa7-4a8f-8cc5-9e7b63a963cf", "ApplicationUser", "admin@meowspace.lol", false, false, null, "ADMIN@MEOWSPACE.LOL", "MEOWSPACEADMIN", "AQAAAAIAAYagAAAAEJlK0N5QPMT6NeyDjT2y16lYynUTTNNA5XxE8YP+GY8+1AUWmwqrgfNDnhUn3R7GVQ==", "Meowdmin", "https://media.makeameme.org/created/the-admin-has-5c9be2.jpg", 4, null, false, "36832faa-f495-4adb-948d-5e1cf1278fcd", false, "MeowSpaceAdmin" },
-                    { "41776062 - 2222 - 1bbb - a222 - 2879a6680b9a", 0, "814b0710-c04f-46b5-be7c-bd2368e45b7d", "ApplicationUser", "dharampal@woofwoof.com", false, false, null, "DHARAMPAL@WOOFWOOF.COM", "DHARAMPAL_OFFICIAL", "AQAAAAIAAYagAAAAEEkAlZgf7M+apA6/s4VMyRMW/bgMCkyUFSZuUa24dc/N9FQU71N95kKzDxnezotxEA==", "Dharampal", "https://i.pinimg.com/736x/bc/08/e9/bc08e964513eb63238efabde6cd193d4.jpg", 1, null, false, "999534ff-95c4-47a7-b251-17136e0c85de", false, "dharampal_official" }
+                    { "41776062 - 1111 - 1aba - a111 - 2879a6680b9a", 0, "559197cd-1995-4290-94a8-f868326564fd", "ApplicationUser", "admin@meowspace.lol", false, false, null, "ADMIN@MEOWSPACE.LOL", "MEOWSPACEADMIN", "AQAAAAIAAYagAAAAENAYpGdYY8hz7srUD/RdU/xAxkbwqr2hK92IOWiNtEUWs4CfRy12PxqnctuRpU6A/g==", "Meowdmin", "https://media.makeameme.org/created/the-admin-has-5c9be2.jpg", 4, null, false, null, null, "b6d6fb64-9f57-43e1-950c-0e9870de2eb0", false, "MeowSpaceAdmin" },
+                    { "41776062 - 2222 - 1bbb - a222 - 2879a6680b9a", 0, "cb96dcde-a5f6-4503-9296-6bb5294c4225", "ApplicationUser", "dharampal@woofwoof.com", false, false, null, "DHARAMPAL@WOOFWOOF.COM", "DHARAMPAL_OFFICIAL", "AQAAAAIAAYagAAAAEBLFnMS4kPfKbKjCvvxs5mDKHUBhDFexQGmwZ4/wKSSI6ttHwdOS7g1D+HhfiGpYuA==", "Dharampal", "https://i.pinimg.com/736x/bc/08/e9/bc08e964513eb63238efabde6cd193d4.jpg", 1, null, false, null, null, "dbcc7c84-b97a-4b37-9772-890be0e925dc", false, "dharampal_official" }
                 });
 
             migrationBuilder.InsertData(

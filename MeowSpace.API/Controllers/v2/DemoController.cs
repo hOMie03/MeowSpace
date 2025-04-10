@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MeowSpace.API.Controllers.v2
@@ -8,6 +9,7 @@ namespace MeowSpace.API.Controllers.v2
     [ApiController]
     public class DemoController : ControllerBase
     {
+        [Authorize(Roles = "Administrator")]
         [HttpGet]
         public IActionResult Test()
         {

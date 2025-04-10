@@ -29,5 +29,12 @@ namespace MeowSpace.API.Controllers.v1
             var result = await _authService.Register(user);
             return Ok(result);
         }
+
+        [HttpPost("RefreshToken")]
+        public async Task<ActionResult<RefreshTokenResponse>> RefreshToken(RefreshTokenRequest user)
+        {
+            var result = await _authService.RefreshTokenAsync(user);
+            return Ok(result);
+        }
     }
 }

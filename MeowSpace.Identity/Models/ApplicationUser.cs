@@ -20,5 +20,8 @@ namespace MeowSpace.Identity.Models
 
         [Required, NotNull]
         public PetType PetType { get; set; }
+
+        public string? RefreshToken { get; set; }
+        public DateTime? RefreshTokenExpiryTime { get; set; }
     }
 }

@@ -9,7 +9,8 @@ namespace MeowSpace.Application.Interfaces.Identity
 {
     public interface IAuthService
     {
-        Task<bool> Login(AuthRequest user);
+        Task<AuthResponse> Login(AuthRequest user);
         Task<RegistrationResponse> Register(RegistrationRequest user);
+        Task<RefreshTokenResponse> RefreshTokenAsync(RefreshTokenRequest request);
     }
 }
